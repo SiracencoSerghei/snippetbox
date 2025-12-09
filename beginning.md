@@ -1,3 +1,4 @@
+```
 (base) ➜  ~ mkdir -p $HOME/code/snippetbox 
 (base) ➜  ~ cd $HOME/code/snippetbox 
 (base) ➜  snippetbox touch main.go
@@ -9,4 +10,4 @@ go: creating new go.mod: module github.com/SergheiSiracenco/snippetbox
 go: to add module requirements and sums:
 	go mod tidy
 (base) ➜  snippetbox 
-
+```
