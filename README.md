@@ -211,7 +211,9 @@ Go дозволяє запускати веб‑сервер без зовніш
 
 ```
 cd $HOME/code/snippetbox 
-go run main.go 
+$ go run main.go
+$ go run .
+$ go run github.com/SiracencoSerghei/snippetbox
 ```
 Після запуску відкрий у браузері:
 
