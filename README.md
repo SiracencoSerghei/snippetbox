@@ -193,7 +193,7 @@ Handler відповідає за:
 
 формування HTTP‑відповіді (status code, headers, body).
 
-Якщо ти знайомий з MVC, handler можна уявляти як controller.
+Якщо ти знайомий з MVC(Model – View – Controller), handler можна уявляти як controller.
 
 2️⃣ Router (ServeMux)
 
@@ -209,3 +209,11 @@ URL‑шляхами (наприклад /, /snippet/view)
 
 Go дозволяє запускати веб‑сервер без зовнішніх серверів (Nginx, Apache). HTTP‑сервер створюється і запускається безпосередньо в main.go.
 
+```
+cd $HOME/code/snippetbox 
+go run main.go 
+```
+Після запуску відкрий у браузері:
+
+```http://localhost:4000
+```
