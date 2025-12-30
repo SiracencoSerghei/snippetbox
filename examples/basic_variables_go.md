@@ -83,6 +83,24 @@ This works, but it is **verbose and not idiomatic Go**.
 
 ---
 
+## Declaring a Variable (Idiomatic Go Way)
+
+```go
+mySkillIssues := 42
+```
+
+### Why this is preferred
+- Uses **short variable declaration** (`:=`)
+- Go **infers the type automatically** (`int` in this case)
+- Combines declaration and initialization in one step
+- Cleaner, shorter, and easier to read
+
+This form is the **standard and idiomatic way** to declare and initialize variables inside functions in Go.
+
+> Note: `:=` can only be used **inside functions**. At package level, `var` is still required.
+
+---
+
 ## Assignment
 
 Initialize the variables used in the `print` statement **with their zero values**.
@@ -119,4 +137,5 @@ These variables will automatically have the following values:
 > If you don’t assign one, Go assigns the **zero value** automatically.
 
 This is one of the reasons Go code is safer and easier to reason about.
+
 
