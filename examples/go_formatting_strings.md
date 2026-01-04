@@ -99,8 +99,10 @@ fmt.Sprintf("Age: %s", "ten")
 
 | Situation | Recommended |
 |---------|-------------|
-| Debugging / quick output | `%v` |
-| User‑facing strings | `%s`, `%d`, `%f` |
+| Debugging / quick output | `%v` |  // default representation
+| User‑facing strings | `%s`, `%d`, `%f` | // string, integers and floats
+| Checking variable type  | `%T` |
+| Logical value (bool) | `%t` | // boolean
 | Precise numeric formatting | `%.2f`, `%.3f`, etc. |
 | Building strings | `fmt.Sprintf` |
 | Printing only | `fmt.Printf` |
