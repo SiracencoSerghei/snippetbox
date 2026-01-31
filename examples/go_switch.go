@@ -14,9 +14,10 @@ func main() {
 	finalCost = bulkMessageCost
 
 	switch {
-	case isPremiumUser:
+	case isPremiumUser:// This must run FIRST so we calculate the discounted price
 		finalCost = finalCost * (1 - discountRate)
-		fallthrough // далі перевіримо баланс
+
+		fallthrough // continue to the next case WITHOUT re-checking condition
 
 	case accountBalance >= finalCost:
 		accountBalance -= finalCost
