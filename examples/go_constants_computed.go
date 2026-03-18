@@ -1,4 +1,4 @@
-package main
+package examples
 
 import "fmt"
 
@@ -21,7 +21,7 @@ That said, you cannot declare a constant that can only be computed at run-time l
 const currentTime = time.Now()
 */
 
-func main() {
+func ConstantComputedDemo() {
 	const secondsInMinute = 60
 	const minutesInHour = 60
 	const secondsInHour = secondsInMinute * minutesInHour

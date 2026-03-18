@@ -1,8 +1,8 @@
-package main
+package examples
 
 import "fmt"
 
-func main() {
+func TypeConversion() {
 	numMessagesFromDoris := 72
 	costPerMessage := .02
 	totalCost := costPerMessage * float64(numMessagesFromDoris)

@@ -1,6 +1,4 @@
-package main
-// Declares the main package.
-// Every executable Go program must be in package main.
+package examples
 
 import (
 	"fmt"
@@ -10,18 +8,12 @@ import (
 	// sort provides utilities for sorting slices
 )
 
-// Vertex is a struct type that groups latitude and longitude together
-type Vertex struct {
-	Lat, Long float64
-	// Lat  = latitude (float64 number)
-	// Long = longitude (float64 number)
+func AddToMap(m map[string]Vertex, key string, v Vertex) map[string]Vertex {
+	m[key] = v
+	return m
 }
 
-func main() {
-	// main is the entry point of the program
-	// Code execution starts here
-
-	// ----------------------------
+func Map2Demo() {
 	// 1. MAP OF VALUES (COPY TRAP)
 	// ----------------------------
 	fmt.Println("== Map of VALUES ==")

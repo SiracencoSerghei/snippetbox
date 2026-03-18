@@ -1,4 +1,4 @@
-package main
+package examples
 
 import (
 	"errors"
@@ -10,7 +10,7 @@ func divide(a, b int) (int, error) {
 	}
 	return a / b, nil
 }
-func main() {
+func ErrorExampleDemo() {
 	result, err := divide(10, 0)
 	if err != nil {
 		fmt.Println("Error:", err)

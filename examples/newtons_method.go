@@ -1,4 +1,4 @@
-package main
+package examples
 
 import (
 	"fmt"
@@ -27,7 +27,7 @@ func Sqrt(x float64) float64 {
 	}
 }
 
-func main() {
+func NewtonsMethod() {
 	x := 2.0
 
 	fmt.Println("Newton:", Sqrt(x))

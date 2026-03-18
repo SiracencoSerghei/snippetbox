@@ -1,8 +1,8 @@
-package main
+package examples
 
 import "fmt"
 
-// func main() {
+// func FormattingStringDemo() {
 // 	const name = "Saul Goodman"
 // 	const openRate = 30.5
 
@@ -13,7 +13,7 @@ import "fmt"
 // 	fmt.Print(msg)
 // }
 
-func main() {
+func FormattingStringDemo() {
 	fname := "Dalinar"
 	lname := "Kholin"
 	age := 45

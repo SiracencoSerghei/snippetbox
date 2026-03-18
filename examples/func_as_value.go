@@ -1,4 +1,4 @@
-package main
+package examples
 
 import "fmt"
 
@@ -16,7 +16,7 @@ func aggregate(a, b, c int, arithmetic func(int, int) int) int {
   return secondResult
 }
 
-func main() {
+func FuncAsValueDemo() {
 	sum := aggregate(2, 3, 4, add)
 	// sum is 9
 	product := aggregate(2, 3, 4, mul)

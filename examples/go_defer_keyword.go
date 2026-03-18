@@ -1,4 +1,4 @@
-package main
+package examples
 
 import (
 	"fmt"
@@ -42,16 +42,16 @@ func connectToPaymentProvider() bool {
 	return false
 }
 
-func test(dbSuccess, paymentSuccess bool) {
+func DeferKeywordExample(dbSuccess, paymentSuccess bool) {
 	shouldConnectToDB = dbSuccess
 	shouldConnectToPaymentProvider = paymentSuccess
 	bootup()
 	fmt.Println("====================================")
 }
 
-func main() {
-	test(true, true)
-	test(false, true)
-	test(true, false)
-	test(false, false)
+func DeferDemo() {
+	DeferKeywordExample	(true, true)
+	DeferKeywordExample	(false, true)
+	DeferKeywordExample	(true, false)
+	DeferKeywordExample	(false, false)
 }

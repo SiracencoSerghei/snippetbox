@@ -1,8 +1,8 @@
-package main
+package examples
 
 import "fmt"
 
-func main() {
+func CommentSyntaxDemo() {
 	
 	// This is a single line comment
 	

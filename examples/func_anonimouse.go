@@ -1,4 +1,4 @@
-package main
+package examples
 
 import "fmt"
 
@@ -13,7 +13,7 @@ func double(a int) int {
     return a + a
 }
 
-func main() {
+func AnonimousFuncDemo() {
     // using a named function
 	newX, newY, newZ := conversions(double, 1, 2, 3)
 	fmt.Println(newX, newY, newZ)

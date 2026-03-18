@@ -1,4 +1,4 @@
-package main
+package examples
 
 import "fmt"
 
@@ -9,7 +9,7 @@ They cannot be more complex types like slices, maps and structs.
 As the name implies, the value of a constant can't be changed after it has been declared.
 */
 
-func main() {
+func ConstantDemo() {
 	const premiumPlanName = "Premium Plan"
 	const basicPlanName = "Basic Plan"
 

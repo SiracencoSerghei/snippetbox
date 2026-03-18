@@ -1,14 +1,23 @@
-package main
+package examples
 
 import "fmt"
 
+// Vertex is a struct type that groups latitude and longitude together
 type Vertex struct {
 	Lat, Long float64
+	// Lat  = latitude (float64 number)
+	// Long = longitude (float64 number)
 }
 
 var m map[string]Vertex
 
-func main() {
+func BuildMap() map[string]Vertex {
+	return map[string]Vertex{
+		"Bell Labs": {40.68433, -74.39967},
+	}
+}
+
+func Map1Demo() {
 	m = make(map[string]Vertex)
 	m["Bell Labs"] = Vertex{
 		40.68433, -74.39967,
@@ -20,7 +29,7 @@ func main() {
 
 }
 // {40.68433 -74.39967}
-// main.Vertex
+// examples.Vertex
 // float64
 
 // Golden rule (memorize)

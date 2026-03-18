@@ -1,6 +1,6 @@
 // Інструкції if у Go схожі на цикли for: вираз не потрібно брати в круглі дужки (`), але фігурні дужки { } — обов’язкові.
 
-package main
+package examples
 
 import (
 	"fmt"
@@ -15,7 +15,7 @@ func sqrt(x float64) string {
 	return fmt.Sprint(math.Sqrt(x))
 }
 
-func main() {
+func IfDemo() {
 	fmt.Println(sqrt(2), sqrt(-4))
 	fmt.Println(reflect.TypeOf(sqrt(2)), reflect.TypeOf(sqrt(-4)))
 }

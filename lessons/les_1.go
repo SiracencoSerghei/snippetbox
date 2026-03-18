@@ -1,11 +1,11 @@
-package main
+package lessons
 
 import "fmt"
 
 
 var city string = "Brussels"
 
-func main() {
+func Les1Demo() {
 	name := "Serghei"
 	age := 48
 	fmt.Println("Hello", name)

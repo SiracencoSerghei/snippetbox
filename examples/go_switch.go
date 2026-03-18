@@ -1,8 +1,8 @@
-package main
+package examples
 
 import "fmt"
 
-func main() {
+func SwitchDemo() {
 	var insufficientFundMessage string = "Purchase failed. Insufficient funds."
 	var purchaseSuccessMessage string = "Purchase successful."
 	var accountBalance float64 = 100.0

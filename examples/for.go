@@ -1,8 +1,8 @@
-package main
+package examples
 
 import "fmt"
 
-func main() {
+func ForDemo() {
 	// Цикл for у Go має три компоненти:
 	// 	init-інструкція (init statement): виконується перед першою ітерацією
 	//  вираз умови (condition expression): обчислюється перед кожною ітерацією
