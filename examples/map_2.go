@@ -9,6 +9,9 @@ import (
 )
 
 func AddToMap(m map[string]Vertex, key string, v Vertex) map[string]Vertex {
+	if m == nil {
+		m = make(map[string]Vertex)
+	}
 	m[key] = v
 	return m
 }

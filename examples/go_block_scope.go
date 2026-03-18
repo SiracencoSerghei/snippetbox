@@ -1,24 +1,17 @@
 package examples
 
-// func splitEmail(email string) (string, string) {
-// 	username, domain := "", ""
-// 	for i, r := range email {
-// 		if r == '@' {
-// 			username = email[:i]
-// 			domain = email[i+1:]
-// 			break
-// 		}
-// 	}
-// 	return username, domain
-// }
-
 import (
 	"errors"
 	"strings"
 )
 
 func splitEmail(email string) (string, string, error) {
+	email = strings.TrimSpace(email) // видаляємо пробіли спереду/ззаду
+
 	username, domain, found := strings.Cut(email, "@")
+	username = strings.TrimSpace(username)
+	domain = strings.TrimSpace(domain)
+
 	if !found || username == "" || domain == "" {
 		return "", "", errors.New("invalid email format")
 	}
