@@ -108,6 +108,10 @@ func TestMap1Demo_Invalid(t *testing.T) {}</code></pre>
 <p>👉 This allows filtering:</p>
 
 <pre><code>go test -run Map1Demo</code></pre>
+OR
+<pre><code>go test ./examples -run 'TestMakeMultiplier|TestMakeAdder|TestApplyTwice' -v</code></pre>
+OR
+<pre><code>go test ./examples -run 'TestMake.*' -v</code></pre>
 </div>
 
 <div class="section">
