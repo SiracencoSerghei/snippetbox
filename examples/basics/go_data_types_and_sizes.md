@@ -75,6 +75,6 @@ temperatureInt := int64(temperatureFloat)
 ## Висновок
 
 - Обирайте **типи за замовчуванням**, якщо немає вагомих причин інакше
-    Ви можете прочитати більше на цю тему [тут](þhttps://blog.boot.dev/golang/default-native-types-golang/)
+    Ви можете прочитати більше на цю тему [тут](https://www.boot.dev/blog/golang/default-native-types-golang/)
 - Пам’ятайте, що `int` і `uint` залежать від архітектури
 - Завжди використовуйте **явне приведення типів**
