@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Go Map Cheatsheet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 24px;
+            line-height: 1.6;
+            background: #f7f7f8;
+            color: #111;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        h1,
+        h2 {
+            margin-top: 0;
+        }
+
+        code,
+        pre {
+            background: #f1f1f1;
+            border-radius: 8px;
+            font-family: "Courier New", monospace;
+        }
+
+        pre {
+            padding: 14px;
+            overflow-x: auto;
+        }
+
+        ul {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Go Map Cheatsheet</h1>
+
+    <div class="card">
+        <h2>What is a map?</h2>
+        <p><strong>map = key → value storage</strong></p>
+        <pre>scores := map[string]int{
+    "alice": 100,
+    "bob": 95,
+}</pre>
+    </div>
+
+    <div class="card">
+        <h2>Create</h2>
+        <pre>users := make(map[string]int)
+cache := map[string]string{}</pre>
+    </div>
+
+    <div class="card">
+        <h2>Set / Update</h2>
+        <pre>users["bob"] = 2
+users["bob"]++</pre>
+    </div>
+
+    <div class="card">
+        <h2>Read</h2>
+        <pre>value := users["bob"]</pre>
+        <p>If key does not exist → returns zero value.</p>
+    </div>
+
+    <div class="card">
+        <h2>Check if key exists</h2>
+        <pre>value, ok := users["bob"]
+if ok {
+    fmt.Println(value)
+}</pre>
+    </div>
+
+    <div class="card">
+        <h2>Delete</h2>
+        <pre>delete(users, "bob")</pre>
+    </div>
+
+    <div class="card">
+        <h2>Map of Structs + Embedded</h2>
+        <pre>type Address struct {
+    City   string
+    Street string
+}
+
+type User struct {
+    ID   int
+    Name string
+    Address
+}
+
+users := map[string]User{
+    "bob": {
+        ID:   1,
+        Name: "Bob",
+        Address: Address{
+            City:   "Brussels",
+            Street: "Main St",
+        },
+    },
+}
+
+fmt.Println(users["bob"].City)</pre>
+        <p><strong>Embedding promotes fields</strong>, so <code>City</code> is accessible directly.</p>
+    </div>
+
+    <div class="card">
+        <h2>Important Behavior</h2>
+        <p><strong>map behaves like a hidden pointer.</strong></p>
+        <pre>m1 := map[string]int{"x": 1}
+m2 := m1
+m2["x"] = 50
+
+fmt.Println(m1["x"]) // 50</pre>
+    </div>
+
+    <div class="card">
+        <h2>Common Backend Use Cases</h2>
+        <ul>
+            <li>IP request counters</li>
+            <li>rate limiter</li>
+            <li>cache</li>
+            <li>headers</li>
+            <li>frequency counters</li>
+            <li>set / deduplication</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>Golden Rule</h2>
+        <p><strong>Known schema → struct</strong></p>
+        <p><strong>Dynamic keys → map</strong></p>
+    </div>
+    <div class="card">
+        <h2>Set (via map)</h2>
+        <p><strong>Go has no built-in set type.</strong> Use <code>map[T]struct{}</code>.</p>
+        <pre>visited := map[string]struct{}{}
+
+visited["bob"] = struct{}{}
+visited["alice"] = struct{}{}
+
+_, ok := visited["bob"]
+if ok {
+    fmt.Println("exists")
+}
+
+delete(visited, "alice")</pre>
+        <p><code>struct{}</code> uses <strong>zero bytes</strong>, so this is the most memory-efficient set pattern.</p>
+    </div>
+</body>
+
+</html>
