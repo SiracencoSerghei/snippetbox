@@ -1,6 +1,8 @@
-package examples
+package data_struct
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // Vertex is a struct type that groups latitude and longitude together
 type Vertex struct {
@@ -36,3 +38,83 @@ func Map1Demo() {
 
 // Dot (.) works ONLY on structs and methods
 // Brackets ([]) work on maps, slices, arrays, strings
+
+// ==================================
+
+// MAP OF STRUCTS
+// http://localhost:4000/demo/map
+
+// ==================================
+
+func MapOfStructs() string {
+	type dob struct {
+		day int
+		month int
+		year int
+	}
+	type people struct {
+		name string
+		email string
+		dob dob
+	}
+
+	members := make(map[int]people)
+
+	members[1] = people{
+		name: "Mary Smith",
+		email: "marysmith@example.com",
+		dob: dob{
+		day:
+		17,
+		month: 3,
+		year: 1990,
+		},
+	}
+	members[2] = people{
+		name: "John Smith",
+		email: "johnsmith@example.com",
+		dob: dob{
+		day:
+		9,
+		month: 12,
+		year: 1988,
+		},
+	}
+		members[3] = people{
+		name: "Janet Doe",
+		email: "janetdoe@example.com",
+		dob: dob{
+		day:
+		1,
+		month: 12,
+		year: 1988,
+		},
+	}
+		members[4] = people{
+		name: "Adam Jones",
+		email: "adamjones@example.com",
+		dob: dob{
+		day:
+		19,
+		month: 8,
+		year: 2001,
+		},
+	}
+
+	var out string
+
+	for k, v := range members {
+		fmt.Println(k, v.name, v.email, v.dob)
+		out += fmt.Sprintf(
+			"%d: %s, %s, %d/%d/%d\n",
+			k,
+			v.name,
+			v.email,
+			v.dob.day,
+			v.dob.month,
+			v.dob.year,
+		)
+	}
+
+	return out
+}

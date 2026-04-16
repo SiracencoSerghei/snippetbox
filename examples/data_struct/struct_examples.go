@@ -1,4 +1,4 @@
-package examples
+package data_struct
 
 // BASIC STRUCT
 type Car struct {

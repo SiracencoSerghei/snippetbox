@@ -1,4 +1,4 @@
-package examples
+package data_struct
 
 import "testing"
 

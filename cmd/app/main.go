@@ -1,10 +1,13 @@
 package main
 
 import (
-"fmt" // New import
+"fmt" 
 "log"
 "net/http"
-"strconv" // New import
+"strconv" 
+
+"github.com/SiracencoSerghei/snippetbox/examples/data_struct"
+
 )
 
 func home(w http.ResponseWriter, r *http.Request) {
@@ -49,13 +52,18 @@ w.Write([]byte("Create a new snippet..."))
 }
 
 func main() {
-// Register the two new handler functions and corresponding URL patterns with
-// the servemux, in exactly the same way that we did before.
-mux := http.NewServeMux()
-mux.HandleFunc("/", home)
-mux.HandleFunc("/snippet", showSnippet)
-mux.HandleFunc("/snippet/create", createSnippet)
-log.Println("Starting server on :4000")
-err := http.ListenAndServe(":4000", mux)
-log.Fatal(err)
+	mux := http.NewServeMux()
+
+	mux.HandleFunc("/", home)
+	mux.HandleFunc("/snippet", showSnippet)
+	mux.HandleFunc("/snippet/create", createSnippet)
+
+	mux.HandleFunc("/demo/map", func(w http.ResponseWriter, r *http.Request) {
+		out := data_struct.MapOfStructs()
+		fmt.Fprint(w, out)
+	})
+
+	log.Println("Starting server on :4000")
+	err := http.ListenAndServe(":4000", mux)
+	log.Fatal(err)
 }
