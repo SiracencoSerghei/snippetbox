@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Go Interfaces</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #222;
+        }
+
+        h2 {
+            color: #444;
+            margin-top: 30px;
+        }
+
+        pre {
+            background: #f4f4f4;
+            padding: 12px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        .box {
+            background: #eef;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Go Interfaces — Simple Mental Model</h1>
+
+    <div class="box">
+        <b>Interface = contract</b><br>
+        If a type has required methods → it automatically satisfies the interface.
+    </div>
+
+    <h2>1. Basic Interface</h2>
+    <pre>
+type Speaker interface {
+    Speak() string
+}
+</pre>
+
+    <h2>2. Struct Implementing Interface</h2>
+    <pre>
+type Person struct {
+    Name string
+}
+
+func (p Person) Speak() string {
+    return "Hello, my name is " + p.Name
+}
+</pre>
+
+    <div class="box">
+        No "implements" keyword in Go.
+        If method exists → it works.
+    </div>
+
+    <h2>3. Using Interface</h2>
+    <pre>
+func SaySomething(s Speaker) {
+    fmt.Println(s.Speak())
+}
+</pre>
+
+    <h2>4. Multiple Types, Same Interface</h2>
+    <pre>
+type Dog struct {}
+
+func (d Dog) Speak() string {
+    return "Woof"
+}
+</pre>
+
+    <div class="box">
+        Person and Dog are different types, but both satisfy Speaker.
+    </div>
+
+    <h2>5. Mental Model</h2>
+    <ul>
+        <li>Interface = behavior</li>
+        <li>Struct = data</li>
+        <li>Method = action</li>
+    </ul>
+
+    <h2>FILES STRUCTURE</h2>
+    <pre>
+examples/interfaces/
+    speaker.go
+    speaker_test.go
+</pre>
+
+    <h2>speaker.go</h2>
+    <pre>
+package interfaces
+
+// Interface
+
+type Speaker interface {
+    Speak() string
+}
+
+// Structs
+
+type Person struct {
+    Name string
+}
+
+type Dog struct {}
+
+// Methods
+
+func (p Person) Speak() string {
+    return "Hello, my name is " + p.Name
+}
+
+func (d Dog) Speak() string {
+    return "Woof"
+}
+
+// Function using interface
+
+func SaySomething(s Speaker) string {
+    return s.Speak()
+}
+</pre>
+
+    <h2>speaker_test.go</h2>
+    <pre>
+package interfaces
+
+import (
+    "fmt"
+    "testing"
+)
+
+func TestPersonSpeak(t *testing.T) {
+    p := Person{Name: "John"}
+
+    result := SaySomething(p)
+
+    fmt.Println("Person says:", result)
+
+    if result != "Hello, my name is John" {
+        t.Fatalf("wrong result: %s", result)
+    }
+}
+
+func TestDogSpeak(t *testing.T) {
+    d := Dog{}
+
+    result := SaySomething(d)
+
+    fmt.Println("Dog says:", result)
+
+    if result != "Woof" {
+        t.Fatalf("wrong result: %s", result)
+    }
+}
+</pre>
+
+    <h2>Run Tests</h2>
+    <pre>
+go test ./examples/interfaces -v
+</pre>
+
+    <div class="box">
+        Key Idea:<br>
+        You don't tell Go "this implements interface".<br>
+        Go checks methods automatically.
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JSON Encoding and Decoding (Simple Guide)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .box {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        code {
+            background: #eee;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>JSON Encoding & Decoding — super simple explanation</h1>
+
+    <div class="box">
+        <h2>1. What is JSON?</h2>
+        <p>JSON = a way to store data as text so computers can understand each other.</p>
+        <p>Think of it like a <b>box of labeled information</b>.</p>
+    </div>
+
+    <div class="box">
+        <h2>2. Example of Go data</h2>
+        <pre>
+type Person struct {
+    Name  string
+    Email string
+}
+</pre>
+        <p>This is just a Go struct (a container for data).</p>
+    </div>
+
+    <div class="box">
+        <h2>3. JSON version of that data</h2>
+        <pre>
+{
+  "Name": "Mary",
+  "Email": "mary@example.com"
+}
+</pre>
+        <p>This is JSON. Same data, different format.</p>
+    </div>
+
+    <div class="box">
+        <h2>4. Encoding (Go → JSON)</h2>
+        <p><b>Encoding = converting Go struct into JSON text</b></p>
+        <pre>
+jsonData, err := json.Marshal(person)
+</pre>
+        <p>Result:</p>
+        <pre>
+{"Name":"Mary","Email":"mary@example.com"}
+</pre>
+    </div>
+
+    <div class="box">
+        <h2>5. Decoding (JSON → Go)</h2>
+        <p><b>Decoding = converting JSON text back into Go struct</b></p>
+        <pre>
+json.Unmarshal(jsonData, &person)
+</pre>
+        <p>Now Go understands the data again.</p>
+    </div>
+
+    <div class="box">
+        <h2>6. Mental model (important)</h2>
+        <ul>
+            <li>Struct = internal Go format</li>
+            <li>JSON = universal language for APIs</li>
+            <li>Marshal = Go → JSON</li>
+            <li>Unmarshal = JSON → Go</li>
+        </ul>
+    </div>
+
+    <div class="box">
+        <h2>7. Why this exists</h2>
+        <p>Because computers hate each other’s formats.</p>
+        <p>So JSON is the translator between systems.</p>
+    </div>
+
+    <div class="box">
+        <h2>8. One-line memory trick</h2>
+        <p><b>Marshal = pack data</b></p>
+        <p><b>Unmarshal = unpack data</b></p>
+    </div>
+
+</body>
+
+</html>
