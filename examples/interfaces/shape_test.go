@@ -3,6 +3,7 @@ package interfaces
 import (
 	"math"
 	"testing"
+	"fmt"
 )
 
 type shapeTestCase struct {
@@ -48,6 +49,28 @@ func TestShapeArea(t *testing.T) {
 			if !almostEqual(got, tt.expected) {
 				t.Errorf("wrong area: got %v want %v", got, tt.expected)
 			}
+		})
+	}
+}
+
+func TestShapeAreaWithInspector(t *testing.T) {
+	inspector := NewInspector()
+
+	shapes := []Shape{
+		Circle{radius: 5},
+		Square{length: 6},
+		Triangle{base: 6, height: 8},
+	}
+
+	for i, shape := range shapes {
+		t.Run(fmt.Sprintf("shape-%d", i), func(t *testing.T) {
+
+			area := shape.Area()
+
+			// 🔍 DEBUG INSPECTION
+			inspector.Inspect(shape)
+
+			t.Logf("area = %.2f", area)
 		})
 	}
 }
