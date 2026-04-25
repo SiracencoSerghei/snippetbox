@@ -46,141 +46,172 @@
         If a type has required methods → it automatically satisfies the interface.
     </div>
 
-    <h2>1. Basic Interface</h2>
-    <pre>
-type Speaker interface {
-    Speak() string
-}
-</pre>
+    <h2>Shape Interface Example (Your Case)</h2>
 
-    <h2>2. Struct Implementing Interface</h2>
     <pre>
-type Person struct {
-    Name string
+type Shape interface {
+    Area() float64
 }
-
-func (p Person) Speak() string {
-    return "Hello, my name is " + p.Name
-}
-</pre>
+    </pre>
 
     <div class="box">
-        No "implements" keyword in Go.
-        If method exists → it works.
+        Any type that has <b>Area() float64</b> automatically becomes a Shape.
     </div>
 
-    <h2>3. Using Interface</h2>
-    <pre>
-func SaySomething(s Speaker) {
-    fmt.Println(s.Speak())
-}
-</pre>
+    <h2>Implementations</h2>
 
-    <h2>4. Multiple Types, Same Interface</h2>
     <pre>
-type Dog struct {}
+type Circle struct { radius float64 }
+type Square struct { length float64 }
+type Triangle struct { base, height float64 }
 
-func (d Dog) Speak() string {
-    return "Woof"
+func (c Circle) Area() float64 {
+    return 3.14 * c.radius * c.radius
 }
-</pre>
+
+func (s Square) Area() float64 {
+    return s.length * s.length
+}
+
+func (t Triangle) Area() float64 {
+    return 0.5 * t.base * t.height
+}
+    </pre>
 
     <div class="box">
-        Person and Dog are different types, but both satisfy Speaker.
+        "Why multiple Area() functions?"<br><br>
+        Because each struct has its own implementation.<br>
+        Same method name → different behavior (polymorphism).
     </div>
 
-    <h2>5. Mental Model</h2>
+    <h2>Using Interface</h2>
+
+    <pre>
+func calculateArea(shapes []Shape) {
+    for _, s := range shapes {
+        fmt.Println(s.Area())
+    }
+}
+    </pre>
+
+    <div class="box">
+        Go doesn't care what the actual type is.<br>
+        It only cares: "does it have Area()?"
+    </div>
+
+    <h2>Main Function</h2>
+
+    <pre>
+func main() {
+    c := Circle{radius: 5}
+    s := Square{length: 6}
+    t := Triangle{base: 6, height: 8}
+
+    shapes := []Shape{c, s, t}
+    calculateArea(shapes)
+}
+    </pre>
+
+    <h2>What Actually Happens</h2>
+
+    <div class="box">
+        At runtime:<br>
+        - Go stores (type + value) inside interface<br>
+        - Calls correct Area() dynamically<br><br>
+
+        Circle → Circle.Area()<br>
+        Square → Square.Area()<br>
+        Triangle → Triangle.Area()
+    </div>
+
+    <h2>Key Insight</h2>
+
+    <div class="box">
+        You are NOT redefining the same function.<br>
+        You are attaching methods to DIFFERENT types.
+    </div>
+
+    <h2>Common Beginner Mistake</h2>
+
+    <div class="box">
+        Thinking interface "forces implementation" ❌<br>
+
+        In Go:<br>
+        Types implement interfaces implicitly ✅
+    </div>
+
+    <h2>Mental Model</h2>
+
     <ul>
         <li>Interface = behavior</li>
         <li>Struct = data</li>
         <li>Method = action</li>
+        <li>Same method name ≠ same function</li>
     </ul>
-
-    <h2>FILES STRUCTURE</h2>
+    <h2>How Interface Works Internally</h2>
+    </pre>
+    
+    <h2>Execution Flow</h2>
+    
     <pre>
-examples/interfaces/
-    speaker.go
-    speaker_test.go
-</pre>
-
-    <h2>speaker.go</h2>
-    <pre>
-package interfaces
-
-// Interface
-
-type Speaker interface {
-    Speak() string
-}
-
-// Structs
-
-type Person struct {
-    Name string
-}
-
-type Dog struct {}
-
-// Methods
-
-func (p Person) Speak() string {
-    return "Hello, my name is " + p.Name
-}
-
-func (d Dog) Speak() string {
-    return "Woof"
-}
-
-// Function using interface
-
-func SaySomething(s Speaker) string {
-    return s.Speak()
-}
-</pre>
-
-    <h2>speaker_test.go</h2>
-    <pre>
-package interfaces
-
-import (
-    "fmt"
-    "testing"
-)
-
-func TestPersonSpeak(t *testing.T) {
-    p := Person{Name: "John"}
-
-    result := SaySomething(p)
-
-    fmt.Println("Person says:", result)
-
-    if result != "Hello, my name is John" {
-        t.Fatalf("wrong result: %s", result)
+    for _, shape := range shapes {
+        shape.Area()
     }
-}
-
-func TestDogSpeak(t *testing.T) {
-    d := Dog{}
-
-    result := SaySomething(d)
-
-    fmt.Println("Dog says:", result)
-
-    if result != "Woof" {
-        t.Fatalf("wrong result: %s", result)
-    }
-}
-</pre>
-
-    <h2>Run Tests</h2>
-    <pre>
-go test ./examples/interfaces -v
-</pre>
-
+        </pre>
+    
     <div class="box">
-        Key Idea:<br>
-        You don't tell Go "this implements interface".<br>
-        Go checks methods automatically.
+        Step-by-step:
+        <br><br>
+        1. Take interface value
+        <br>
+        2. Read its TYPE
+        <br>
+        3. Find method for that TYPE
+        <br>
+        4. Execute correct implementation
+    </div>
+    
+    <h2>Under the Hood (Scheme)</h2>
+    
+    <pre>
+              +----------------------+
+              |      Interface       |
+              |----------------------|
+              | Type: Circle         |
+              | Value: {radius: 5}   |
+              +----------+-----------+
+                         |
+                         v
+                  Circle.Area()
+    
+    
+              +----------------------+
+              |      Interface       |
+              |----------------------|
+              | Type: Square         |
+              | Value: {length: 6}   |
+              +----------+-----------+
+                         |
+                         v
+                  Square.Area()
+    
+    
+              +----------------------+
+              |      Interface       |
+              |----------------------|
+              | Type: Triangle       |
+              | Value: {b:6, h:8}    |
+              +----------+-----------+
+                         |
+                         v
+                  Triangle.Area()
+        </pre>
+    
+    <h2>Key Insight</h2>
+    
+    <div class="box">
+        Same method name ≠ same function.<br>
+        It is resolved dynamically based on TYPE inside interface.
     </div>
 
 </body>
